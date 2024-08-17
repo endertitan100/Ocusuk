@@ -15,8 +15,12 @@ func _input(event):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	var Diving = false
 	if Input.is_action_pressed("left"): Velocity.x -= 20*delta
 	if Input.is_action_pressed("right"): Velocity.x += 20*delta
+	if Input.is_action_pressed("dive"):
+		Velocity.y += 20*delta
+		Diving = true
 	
 	var Power = NoiseGen.get_noise_1d(Time.get_ticks_msec()/60.0)
 	Power += 1.3
@@ -25,7 +29,12 @@ func _process(delta):
 	Velocity.x -= Power*delta
 	if Velocity.x > 2.2: Velocity.x = 2.2
 	Velocity.y += 1.4*delta
-	if Velocity.y > 1.2: Velocity.y = 1.2
+	
+	#Add slower falling speed than diving speed
+	if Diving and (Velocity.y > 2.2):
+		Velocity.y = 2.2
+	elif not Diving and (Velocity.y > 1.2):
+		Velocity.y = 1.2
 	
 	position += Velocity
 	
