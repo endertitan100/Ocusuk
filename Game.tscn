@@ -1,20 +1,54 @@
-[gd_scene load_steps=6 format=3 uid="uid://cbuysclfonfg7"]
+[gd_scene load_steps=9 format=3 uid="uid://cbuysclfonfg7"]
 
+[ext_resource type="Script" path="res://enemy_spawner.gd" id="2_fm45t"]
 [ext_resource type="Script" path="res://Controller.gd" id="2_r31fr"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_7jaae"]
-size = Vector2(75, 50)
+size = Vector2(50, 75)
 subdivide_width = 1
 subdivide_depth = 1
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vjk5q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6wafx"]
-size = Vector2(76, 50)
+size = Vector2(50, 76)
+
+[sub_resource type="Curve" id="Curve_xcvfr"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.368771, 0.201602), 0.0, 0.0, 0, 0, Vector2(0.558139, 0.0714287), 0.0, 0.0, 0, 0, Vector2(0.810631, 0.50534), 0.0, 0.0, 0, 0, Vector2(0.986711, 0.00200272), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_adxcr"]
+curve = SubResource("Curve_xcvfr")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kyujq"]
+resource_local_to_scene = true
 particle_flag_disable_z = true
-gravity = Vector3(0, 98, 0)
+emission_shape_offset = Vector3(1000, 0, 0)
+emission_shape = 3
+emission_box_extents = Vector3(20, 100, 0)
+angle_min = 1.07288e-05
+angle_max = 12.8
+inherit_velocity_ratio = 1.55
+direction = Vector3(0, 0, 0)
+spread = 0.0
+flatness = 1.0
+initial_velocity_min = -2000.0
+initial_velocity_max = -1000.0
+gravity = Vector3(-10, 0, 0)
+radial_accel_min = -31.51
+radial_accel_max = 21.92
+scale_min = 2.0
+scale_max = 4.0
+color = Color(0.678759, 0.784273, 0.966353, 0.596078)
+emission_curve = SubResource("CurveTexture_adxcr")
+turbulence_enabled = true
+turbulence_noise_strength = 20.0
+turbulence_noise_scale = 27.075
+turbulence_noise_speed_random = 0.08
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.005
+turbulence_initial_displacement_min = 1.49012e-06
+turbulence_initial_displacement_max = 1.49012e-06
 
 [node name="Game" type="Node2D"]
 
@@ -31,6 +65,17 @@ WaveSurgePower = 1.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
 shape = SubResource("RectangleShape2D_6wafx")
 
+[node name="EnemySpawner" type="MeshInstance2D" parent="."]
+position = Vector2(700, -450)
+mesh = SubResource("QuadMesh_7jaae")
+texture = SubResource("PlaceholderTexture2D_vjk5q")
+script = ExtResource("2_fm45t")
+
+[node name="Area2D" type="Area2D" parent="EnemySpawner"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySpawner/Area2D"]
+shape = SubResource("RectangleShape2D_6wafx")
+
 [node name="Floor" type="Area2D" parent="."]
 position = Vector2(0, 360)
 scale = Vector2(17, 1)
@@ -38,10 +83,21 @@ scale = Vector2(17, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 shape = SubResource("RectangleShape2D_6wafx")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-position = Vector2(650, 0)
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(1064, 4)
 scale = Vector2(0.225, 3.61)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Node2D"]
+position = Vector2(-2035.56, -0.554017)
+amount = 20
 process_material = SubResource("ParticleProcessMaterial_kyujq")
+lifetime = 10.0
+preprocess = 10.0
+explosiveness = 0.11
+fixed_fps = 15
 trail_enabled = true
+trail_sections = 6
+trail_section_subdivisions = 8
 
 [connection signal="area_entered" from="Player/Area2D" to="Player" method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="EnemySpawner/Area2D" to="EnemySpawner" method="_on_area_2d_area_entered"]
