@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dvst15xjlwc34"]
+[gd_scene load_steps=6 format=3 uid="uid://dvst15xjlwc34"]
 
 [ext_resource type="Script" path="res://enemy.gd" id="1_rwff1"]
 
@@ -7,15 +7,29 @@ size = Vector2(50, 75)
 subdivide_width = 1
 subdivide_depth = 1
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vjk5q"]
+[sub_resource type="Gradient" id="Gradient_dnbrl"]
+interpolation_mode = 2
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0, 0.731148)
+colors = PackedColorArray(0, 0, 0, 1, 0, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lcc3b"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_dnbrl")
+width = 32
+height = 32
+use_hdr = true
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.0854701, 0.0940171)
+repeat = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6wafx"]
-size = Vector2(75.4706, 76)
+size = Vector2(50, 74)
 
 [node name="EnemyMesh" type="MeshInstance2D"]
-position = Vector2(700, -450)
 mesh = SubResource("QuadMesh_7jaae")
-texture = SubResource("PlaceholderTexture2D_vjk5q")
+texture = SubResource("GradientTexture2D_lcc3b")
 script = ExtResource("1_rwff1")
 
 [node name="Enemy" type="Area2D" parent="."]

@@ -11,7 +11,7 @@ subdivide_depth = 1
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vjk5q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6wafx"]
-size = Vector2(75.4706, 76)
+size = Vector2(75.2353, 74)
 
 [sub_resource type="Theme" id="Theme_d28jh"]
 
@@ -69,6 +69,7 @@ script = ExtResource("2_r31fr")
 WaveSurgePower = 1.0
 
 [node name="Area2D" type="Area2D" parent="Player"]
+scale = Vector2(0.66, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
 shape = SubResource("RectangleShape2D_6wafx")
@@ -80,6 +81,7 @@ offset_top = -326.0
 offset_right = -276.0
 offset_bottom = -299.0
 theme = SubResource("Theme_d28jh")
+theme_override_font_sizes/font_size = 22
 theme_override_styles/background = SubResource("StyleBoxFlat_010as")
 theme_override_styles/fill = SubResource("StyleBoxFlat_n733s")
 step = 5.0
