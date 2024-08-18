@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cbuysclfonfg7"]
+[gd_scene load_steps=12 format=3 uid="uid://cbuysclfonfg7"]
 
 [ext_resource type="Script" path="res://enemy_spawner.gd" id="2_fm45t"]
 [ext_resource type="Script" path="res://Controller.gd" id="2_r31fr"]
@@ -12,6 +12,14 @@ subdivide_depth = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6wafx"]
 size = Vector2(50, 76)
+
+[sub_resource type="Theme" id="Theme_d28jh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_010as"]
+bg_color = Color(0, 0.676564, 0.75267, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n733s"]
+bg_color = Color(0.685423, 0, 0.245244, 1)
 
 [sub_resource type="Curve" id="Curve_xcvfr"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.368771, 0.201602), 0.0, 0.0, 0, 0, Vector2(0.558139, 0.0714287), 0.0, 0.0, 0, 0, Vector2(0.810631, 0.50534), 0.0, 0.0, 0, 0, Vector2(0.986711, 0.00200272), 0.0, 0.0, 0, 0]
@@ -64,6 +72,19 @@ WaveSurgePower = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
 shape = SubResource("RectangleShape2D_6wafx")
+
+[node name="Health" type="ProgressBar" parent="Player"]
+top_level = true
+offset_left = -603.0
+offset_top = -326.0
+offset_right = -276.0
+offset_bottom = -299.0
+theme = SubResource("Theme_d28jh")
+theme_override_styles/background = SubResource("StyleBoxFlat_010as")
+theme_override_styles/fill = SubResource("StyleBoxFlat_n733s")
+step = 5.0
+value = 100.0
+show_percentage = false
 
 [node name="EnemySpawner" type="MeshInstance2D" parent="."]
 position = Vector2(700, -450)
