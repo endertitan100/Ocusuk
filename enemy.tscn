@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvst15xjlwc34"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_rwff1"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_7jaae"]
+size = Vector2(50, 75)
+subdivide_width = 1
+subdivide_depth = 1
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vjk5q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6wafx"]
+size = Vector2(75.4706, 76)
+
+[node name="EnemyMesh" type="MeshInstance2D"]
+position = Vector2(700, -450)
+mesh = SubResource("QuadMesh_7jaae")
+texture = SubResource("PlaceholderTexture2D_vjk5q")
+script = ExtResource("1_rwff1")
+
+[node name="Enemy" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+shape = SubResource("RectangleShape2D_6wafx")

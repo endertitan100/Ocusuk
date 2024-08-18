@@ -86,17 +86,6 @@ step = 5.0
 value = 100.0
 show_percentage = false
 
-[node name="EnemySpawner" type="MeshInstance2D" parent="."]
-position = Vector2(700, -450)
-mesh = SubResource("QuadMesh_7jaae")
-texture = SubResource("PlaceholderTexture2D_vjk5q")
-script = ExtResource("2_fm45t")
-
-[node name="Area2D" type="Area2D" parent="EnemySpawner"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySpawner/Area2D"]
-shape = SubResource("RectangleShape2D_6wafx")
-
 [node name="Floor" type="Area2D" parent="."]
 position = Vector2(0, 360)
 scale = Vector2(17, 1)
@@ -104,11 +93,11 @@ scale = Vector2(17, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 shape = SubResource("RectangleShape2D_6wafx")
 
-[node name="Node2D" type="Node2D" parent="."]
-position = Vector2(1064, 4)
+[node name="Particles" type="Node2D" parent="."]
+position = Vector2(1060, 0)
 scale = Vector2(0.225, 3.61)
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Node2D"]
+[node name="CurrentIndicator" type="GPUParticles2D" parent="Particles"]
 position = Vector2(-2035.56, -0.554017)
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_kyujq")
@@ -120,6 +109,8 @@ trail_enabled = true
 trail_sections = 6
 trail_section_subdivisions = 8
 
+[node name="EnemySpawner" type="Node2D" parent="."]
+script = ExtResource("2_fm45t")
+
 [connection signal="area_entered" from="Player/Area2D" to="Player" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Player/Area2D" to="Player" method="_on_area_2d_area_exited"]
-[connection signal="area_entered" from="EnemySpawner/Area2D" to="EnemySpawner" method="_on_area_2d_area_entered"]
