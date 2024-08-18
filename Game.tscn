@@ -11,7 +11,7 @@ subdivide_depth = 1
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vjk5q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6wafx"]
-size = Vector2(50, 76)
+size = Vector2(75.4706, 76)
 
 [sub_resource type="Theme" id="Theme_d28jh"]
 
@@ -121,4 +121,5 @@ trail_sections = 6
 trail_section_subdivisions = 8
 
 [connection signal="area_entered" from="Player/Area2D" to="Player" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Player/Area2D" to="Player" method="_on_area_2d_area_exited"]
 [connection signal="area_entered" from="EnemySpawner/Area2D" to="EnemySpawner" method="_on_area_2d_area_entered"]

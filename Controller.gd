@@ -10,6 +10,8 @@ var LastTime = 0.0
 var LastDamaged = 0.0
 var NoiseGen = FastNoiseLite.new()
 var Health = 100
+var ShouldDamage = false
+var DamageArea:Area2D
 
 func HandleMovement(delta):
 	var Diving = false
@@ -42,6 +44,17 @@ func HandleMovement(delta):
 	if position.y < -350 or position.y > 350:
 		position.y = clamp(position.y,-350,350)
 
+func DamagePlayer():
+	if not ShouldDamage: return
+	var Type = DamageArea.name
+	if (Type == "Floor" or Type == "Enemy") and Time.get_ticks_msec() - LastDamaged > 377:
+		LastDamaged = Time.get_ticks_msec()
+		if  Type == "Floor":
+			Health -= 5
+		elif Type == "Enemy":
+			Health -= 10
+		HealthBar.value = Health
+
 func _input(event):
 	if event.is_action_pressed("jump") and Time.get_ticks_msec() - LastTime > 207:
 		Velocity.y = -1 * FloatStrength
@@ -50,14 +63,11 @@ func _input(event):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	HandleMovement(delta)
+	DamagePlayer()
 
 func _on_area_2d_area_entered(area:Area2D):
-	var Type = area.name
-	if Type == "Floor" or Type == "Enemy" and Time.get_ticks_msec() - LastDamaged > 2000:
-		if  Type == "Floor":
-			Health -= 5
-			LastDamaged = Time.get_ticks_msec()
-		elif Type == "Enemy":
-			Health -= 10
-			LastDamaged = Time.get_ticks_msec()
-		HealthBar.value = Health
+	DamageArea = area
+	ShouldDamage = true
+
+func _on_area_2d_area_exited(_area):
+	ShouldDamage = false
