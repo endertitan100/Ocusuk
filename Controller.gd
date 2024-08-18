@@ -3,10 +3,13 @@ extends MeshInstance2D
 @export var WaveSurgePower:float
 @export var MoveSpeed:float = 20
 @export var FloatStrength:float = 1.2
+@onready var HealthBar: ProgressBar = $Health
 
 var Velocity = Vector2(0,0)
 var LastTime = 0.0
+var LastDamaged = 0.0
 var NoiseGen = FastNoiseLite.new()
+var Health = 100
 
 func HandleMovement(delta):
 	var Diving = false
@@ -50,7 +53,11 @@ func _process(delta):
 
 func _on_area_2d_area_entered(area:Area2D):
 	var Type = area.name
-	if Type == "Floor":
-		print("Damage")
-	elif Type == "Enemy":
-		print("Damage")
+	if Type == "Floor" or Type == "Enemy" and Time.get_ticks_msec() - LastDamaged > 2000:
+		if  Type == "Floor":
+			Health -= 5
+			LastDamaged = Time.get_ticks_msec()
+		elif Type == "Enemy":
+			Health -= 10
+			LastDamaged = Time.get_ticks_msec()
+		HealthBar.value = Health
