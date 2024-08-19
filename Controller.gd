@@ -6,12 +6,14 @@ extends MeshInstance2D
 @onready var HealthBar: ProgressBar = $Health
 
 var Velocity = Vector2(0,0)
-var LastTime = 0.0
+var LastJump = 0.0
 var LastDamaged = 0.0
+var LastShoot = 0.0
 var NoiseGen = FastNoiseLite.new()
 var Health = 100
 var ShouldDamage = false
 var DamageArea:Area2D
+var BaseBubble = preload("res://bubble.tscn")
 
 func HandleMovement(delta):
 	var Diving = false
@@ -55,10 +57,18 @@ func DamagePlayer():
 			Health -= 10
 		HealthBar.value = Health
 
+func ShootBubble():
+	var bubble_instance = BaseBubble.instantiate()
+	get_parent().add_child(bubble_instance)
+	bubble_instance.position = position
+
 func _input(event):
-	if event.is_action_pressed("jump") and Time.get_ticks_msec() - LastTime > 207:
+	if event.is_action_pressed("jump") and Time.get_ticks_msec() - LastJump > 207:
 		Velocity.y = -1 * FloatStrength
-		LastTime = Time.get_ticks_msec()
+		LastJump = Time.get_ticks_msec()
+	elif event.is_action_pressed("shoot") and Time.get_ticks_msec() - LastShoot > 346:
+		LastShoot = Time.get_ticks_msec()
+		ShootBubble()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

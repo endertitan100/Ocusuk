@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://3gtf10um2quh"]
+
+[ext_resource type="Script" path="res://bubble.gd" id="1_0oi68"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_7jaae"]
+size = Vector2(50, 50)
+subdivide_width = 1
+subdivide_depth = 1
+
+[sub_resource type="Gradient" id="Gradient_dnbrl"]
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0, 0.996721, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lcc3b"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_dnbrl")
+width = 256
+height = 256
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ro8mk"]
+radius = 25.0
+
+[node name="BubbleMesh" type="MeshInstance2D"]
+mesh = SubResource("QuadMesh_7jaae")
+texture = SubResource("GradientTexture2D_lcc3b")
+script = ExtResource("1_0oi68")
+
+[node name="Bubble" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bubble"]
+shape = SubResource("CircleShape2D_ro8mk")
+debug_color = Color(0.989044, 0, 0.29505, 0.42)

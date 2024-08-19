@@ -16,4 +16,4 @@ func _process(_delta):
 		var enemy_instance = BaseEnemy.instantiate()
 		get_parent().add_child(enemy_instance)
 
-# Make some code that displays health and ability to collect and pickup scales
+# Make some ability to collect and pickup scales
