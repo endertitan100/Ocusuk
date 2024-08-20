@@ -7,6 +7,7 @@ var YVel = 0
 var Height = 0
 var Health = 25
 var Attacking = false
+var BaseScale = preload("res://scale.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Height = Random.randi_range(-250,300)
@@ -48,7 +49,11 @@ func _process(delta):
 		Attack()
 
 func DropScale():
-	pass
+	set_deferred("parent",get_parent())
+	var scale_instance = BaseScale.instantiate()
+	get_parent().add_child(scale_instance)
+	scale_instance.position = position
+	scale_instance.rotation = Random.randi_range(-25,25)
 
 func _on_enemy_area_entered(area:Area2D):
 	if area.name == "Bubble":

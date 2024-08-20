@@ -83,8 +83,17 @@ func _process(delta):
 	DamagePlayer()
 
 func _on_area_2d_area_entered(area:Area2D):
-	DamageArea = area
-	ShouldDamage = true
+	if area.name != "Scale":
+		DamageArea = area
+		ShouldDamage = true
+	else:
+		var color = area.get_parent().modulate
+		area.get_parent().queue_free()
+		print(color)
+		var Scale = get_node("%InvItem").duplicate()
+		Scale.modulate = color
+		Scale.visible = true
+		get_node("%InvItem").get_parent().add_child(Scale)
 
 func _on_area_2d_area_exited(area):
 	var Type = area.name

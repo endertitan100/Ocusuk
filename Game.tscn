@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://enemy_spawner.gd" id="2_fm45t"]
 [ext_resource type="Script" path="res://Controller.gd" id="2_r31fr"]
 [ext_resource type="Script" path="res://UI.gd" id="3_s7rxw"]
+[ext_resource type="Texture2D" uid="uid://bvtrlwpfl6d1i" path="res://Scale.png" id="5_qml5k"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qg2qc"]
 
@@ -70,8 +71,6 @@ turbulence_influence_min = 0.0
 turbulence_influence_max = 0.005
 turbulence_initial_displacement_min = 1.49012e-06
 turbulence_initial_displacement_max = 1.49012e-06
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kom0i"]
 
 [node name="Game" type="Node2D"]
 
@@ -193,10 +192,12 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="Control/Inventory"]
+[node name="InvItem" type="TextureRect" parent="Control/Inventory"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
-texture = SubResource("PlaceholderTexture2D_kom0i")
-expand_mode = 2
+texture = ExtResource("5_qml5k")
+expand_mode = 3
 
 [connection signal="area_entered" from="Player/Area2D" to="Player" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Player/Area2D" to="Player" method="_on_area_2d_area_exited"]
