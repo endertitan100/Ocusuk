@@ -17,8 +17,12 @@ var BaseBubble = preload("res://bubble.tscn")
 
 func HandleMovement(delta):
 	var Diving = false
-	if Input.is_action_pressed("left"): Velocity.x -= MoveSpeed*delta
-	if Input.is_action_pressed("right"): Velocity.x += MoveSpeed*delta
+	if Input.is_action_pressed("left"):
+		Velocity.x -= MoveSpeed*delta
+		get_node("Sprite2D").flip_h = false
+	if Input.is_action_pressed("right"): 
+		Velocity.x += MoveSpeed*delta
+		get_node("Sprite2D").flip_h = true
 	if Input.is_action_pressed("dive"):
 		Velocity.y += MoveSpeed*delta
 		Diving = true
