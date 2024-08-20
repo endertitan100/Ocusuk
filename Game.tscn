@@ -93,7 +93,7 @@ polygon = PackedVector2Array(-263, 213, -78, 211, -4, 178, 131, 202, 261, 210, 4
 material = SubResource("CanvasItemMaterial_qg2qc")
 mesh = SubResource("QuadMesh_7jaae")
 script = ExtResource("2_r31fr")
-WaveSurgePower = 5.0
+WaveSurgePower = 2.0
 
 [node name="Area2D" type="Area2D" parent="Player"]
 scale = Vector2(0.66, 1)
@@ -149,6 +149,7 @@ trail_sections = 6
 trail_section_subdivisions = 8
 
 [node name="EnemySpawner" type="Node2D" parent="."]
+unique_name_in_owner = true
 script = ExtResource("2_fm45t")
 SpawnTime = 4.0
 SpawnRange = 6.0
@@ -198,6 +199,18 @@ visible = false
 layout_mode = 2
 texture = ExtResource("5_qml5k")
 expand_mode = 3
+
+[node name="Info" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = -140.0
+offset_top = 120.0
+offset_right = 140.0
+offset_bottom = 180.0
+pivot_offset = Vector2(140, 0)
+text = "Text
+"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="area_entered" from="Player/Area2D" to="Player" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Player/Area2D" to="Player" method="_on_area_2d_area_exited"]

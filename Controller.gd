@@ -6,7 +6,7 @@ extends MeshInstance2D
 @export var ShootCooldown:float = 0.35
 @onready var HealthBar: ProgressBar = $Health
 
-var Velocity = Vector2(0,0)
+var Velocity = Vector2(0,-1)
 var LastJump = 0.0
 var LastDamaged = 0.0
 var LastShoot = 0.0
@@ -94,6 +94,11 @@ func _on_area_2d_area_entered(area:Area2D):
 		Scale.modulate = color
 		Scale.visible = true
 		get_node("%InvItem").get_parent().add_child(Scale)
+		get_node("%EnemySpawner").SpawnTime *= 0.9
+		get_node("%EnemySpawner").SpawnRange *= 0.9
+		FloatStrength *= 1.1
+		WaveSurgePower *= 1.2
+		ShootCooldown /= 0.95
 
 func _on_area_2d_area_exited(area):
 	var Type = area.name

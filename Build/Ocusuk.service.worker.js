@@ -4,7 +4,7 @@
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
 /** @type {string} */
-const CACHE_VERSION = '1723846802|16048247151';
+const CACHE_VERSION = '1724174923|94176831';
 /** @type {string} */
 const CACHE_PREFIX = 'Ocusuk-sw-cache-';
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;

@@ -11,11 +11,11 @@ config_version=5
 [application]
 
 config/name="Ocusuk"
-config/version="V0.4"
-run/main_scene="res://Game.tscn"
+config/version="1.0"
+run/main_scene="res://Menu.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 boot_splash/bg_color=Color(0.101026, 0.200063, 0.285105, 1)
-config/icon="res://icon.svg"
+config/icon="res://Player.png"
 
 [display]
 
