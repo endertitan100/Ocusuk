@@ -3,8 +3,8 @@ extends Node2D
 var Random = RandomNumberGenerator.new()
 var LastSpawn:int = 0
 var BaseEnemy = preload("res://enemy.tscn")
-@export var SpawnTime:int
-@export var SpawnRange:int
+@export var SpawnTime:float
+@export var SpawnRange:float
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

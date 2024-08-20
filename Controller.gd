@@ -3,6 +3,7 @@ extends MeshInstance2D
 @export var WaveSurgePower:float
 @export var MoveSpeed:float = 20
 @export var FloatStrength:float = 1.2
+@export var ShootCooldown:float = 0.35
 @onready var HealthBar: ProgressBar = $Health
 
 var Velocity = Vector2(0,0)
@@ -72,7 +73,7 @@ func _input(event):
 	if event.is_action_pressed("jump") and Time.get_ticks_msec() - LastJump > 207:
 		Velocity.y = -1 * FloatStrength
 		LastJump = Time.get_ticks_msec()
-	elif event.is_action_pressed("shoot") and Time.get_ticks_msec() - LastShoot > 346:
+	elif event.is_action_pressed("shoot") and Time.get_ticks_msec() - LastShoot > ShootCooldown * 1000:
 		LastShoot = Time.get_ticks_msec()
 		ShootBubble()
 
