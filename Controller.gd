@@ -56,6 +56,8 @@ func DamagePlayer():
 		elif Type == "Enemy":
 			Health -= 10
 		HealthBar.value = Health
+		if Health <= 0:
+			get_tree().change_scene_to_file("res://Game.tscn")
 
 func ShootBubble():
 	var bubble_instance = BaseBubble.instantiate()
@@ -79,5 +81,9 @@ func _on_area_2d_area_entered(area:Area2D):
 	DamageArea = area
 	ShouldDamage = true
 
-func _on_area_2d_area_exited(_area):
-	ShouldDamage = false
+func _on_area_2d_area_exited(area):
+	var Type = area.name
+	if not DamageArea: return
+	if Type == DamageArea.name:
+		ShouldDamage = false
+		DamageArea = null

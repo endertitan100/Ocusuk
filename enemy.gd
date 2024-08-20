@@ -47,6 +47,8 @@ func _process(delta):
 		Speed = Random.randf_range(45,90)
 		Attack()
 
+func DropScale():
+	pass
 
 func _on_enemy_area_entered(area:Area2D):
 	if area.name == "Bubble":
@@ -54,4 +56,5 @@ func _on_enemy_area_entered(area:Area2D):
 		if Attacking: return
 		Health -= 15
 		if Health <= 0:
+			DropScale()
 			queue_free()

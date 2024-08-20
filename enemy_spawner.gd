@@ -10,7 +10,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if Time.get_ticks_msec() - LastSpawn > Random.randi_range(2400,6000):
+	if Time.get_ticks_msec() - LastSpawn > Random.randi_range(4200,10400):
 		LastSpawn = Time.get_ticks_msec()
 		
 		var enemy_instance = BaseEnemy.instantiate()
